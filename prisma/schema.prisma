@@ -16,6 +16,19 @@ model User {
   username    String    @unique @db.VarChar(10)
   email       String    @unique @db.VarChar(40)
   isVerified  Boolean   @default(false)
+  profile     Profile?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Profile {
+  id              Int       @id @default(autoincrement())
+  profilePicture  String
+  firstName       String    @db.VarChar(30)
+  lastName        String    @db.VarChar(40)
+  bio             String    @db.VarChar(200)
+  userId          Int       @unique
+  user            User      @relation(fields: [userId], references: [id])
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
