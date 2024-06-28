@@ -41,6 +41,7 @@ model Post {
   content         String    @db.VarChar(500)
   profileId       Int       @unique
   profile         Profile   @relation(fields: [profileId], references: [id])
+  comment         Comment[]
   picture         String?
   published       Boolean   @default(false)
   createdAt       DateTime  @default(now())
@@ -52,6 +53,8 @@ model Comment {
   content         String    @db.VarChar(250)
   profileId       Int       @unique
   profile         Profile    @relation(fields: [profileId], references: [id])
+  postId          Int       @unique
+  post            Post      @relation(fields: [postId], references: [id])
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 }

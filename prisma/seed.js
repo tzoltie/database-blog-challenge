@@ -76,6 +76,30 @@ async function seed() {
       }
     })
 
+    const createdComment = await prisma.comment.create({
+      data: {
+        content: 'Welcome to the site',
+        profileId: users[2].id,
+        postId: createdPost1.id
+      }
+    })
+
+    const createdComment1 = await prisma.comment.create({
+      data: {
+        content: 'Excited for it',
+        profileId: users[0].id,
+        postId: createdPost2.id
+      }
+    })
+
+    const createdComment2 = await prisma.comment.create({
+      data: {
+        content: 'I think it might be!',
+        profileId: users[1].id,
+        postId: createdPost3.id
+      }
+    })
+
     console.log('created Posts', createdPost1)
     // Don't edit any of the code below this line
     process.exit(0);
