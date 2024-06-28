@@ -29,6 +29,29 @@ model Profile {
   bio             String    @db.VarChar(200)
   userId          Int       @unique
   user            User      @relation(fields: [userId], references: [id])
+  post            Post[]
+  comment         Comment[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Post {
+  id              Int       @id @default(autoincrement())
+  title           String    @db.VarChar(150)
+  content         String    @db.VarChar(500)
+  profileId       Int       @unique
+  profile         Profile   @relation(fields: [profileId], references: [id])
+  picture         String?
+  published       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Comment {
+  id              Int       @id @default(autoincrement())
+  content         String    @db.VarChar(250)
+  profileId       Int       @unique
+  profile         Profile    @relation(fields: [profileId], references: [id])
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 }

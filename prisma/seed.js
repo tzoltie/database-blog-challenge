@@ -52,10 +52,31 @@ async function seed() {
 
     console.log(`users created`, users);
 
+    const createdPost1 = await prisma.post.create({
+      data: {
+          title: 'First Post',
+          content: 'first post on the new site',
+          profileId: users[0].id
+      }
+    })
 
-    
+    const createdPost2 = await prisma.post.create({
+      data: {
+          title: 'Big Weekend',
+          content: 'big weekend for the Lanes',
+          profileId: users[1].id
+      }
+    })
 
+    const createdPost3 = await prisma.post.create({
+      data: {
+          title: 'App',
+          content: 'is this app up and running yet',
+          profileId: users[2].id
+      }
+    })
 
+    console.log('created Posts', createdPost1)
     // Don't edit any of the code below this line
     process.exit(0);
 }
